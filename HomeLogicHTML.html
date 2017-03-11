@@ -312,56 +312,30 @@
 </html>
 <script language="javascript">
 
-   function getGrades(list, tRows) {
-        var grades = [];
-        var studentIds = [];
-        var out_of;
-        var percents = [];
-
-        for (i = 0; i < list.length; i++) {
-            var outOf = false;
-            if (list[i].getAttribute("NAME").includes("grade")) {
-                grades.push(list[i].getAttribute("VALUE"));
-                console.log((list[i].getAttribute("VALUE")));
-            }
-            else if (list[i].getAttribute("NAME").includes("points") && !outOf) {
-                out_of = list[i].getAttribute("Value");
-                outOf = true;
-            }
-        }
-
-        for (i = 0; i < tRows.length; i++) {
-            console.log(i);
-            if (tRows[i].getAttribute("class") === "even" || tRows[i].getAttribute("class") === "odd") {
-                var td = tRows[i].getElementsByTagName("td");
-                var num = td[0].innerHTML;
-                num = num.split("(")[1].split(")")[0];
-                studentIds.push(num);
-                console.log(num);
-            }
-
-        }
-
-        for (i = 0; i < grades.length; i++) {
-            percents.push(grades[i] / out_of * 100);
-        }
-        console.log(percents);
-        console.log(studentIds);
+   function Student(id, grade) {
+    this.id = id;
+    this.grade = grade;
     }
 
+    var students = []
 
-    function Test() {
-        // array of all table data elements
-        var list = document.getElementsByTagName("INPUT");
-        var rows = document.getElementsByTagName("tr");
-        getGrades(list, rows);
+    var studentCount = document.getElementById('studentCount').value;
+    var outOf = document.getElementById('OutOf').value;
+
+    var i; for (i = 0; i < studentCount; i++) {
+        var workingRow = document.getElementsByTagName('tr').item(i);
+
+        var workingId = workingRow.getElementsByTagName('td')[0].innerHTML;
+        var regx = /\(([^)]+)\)/;
+
+        workingId = (regx.exec(workingId) != null) ? workingId = regx.exec(workingId) : "cut off";
+
+        var workingGrade = Math.round(workingRow.getElementsByTagName('input')[1].value / outOf * 100);
+
+        students.push(new Student(workingId, workingGrade));
     }
 
-    
-    Test();
-
-var myvariable;
-	myvariable = false;
+    console.log(students);
 
 function CheckBlank(name,drop){
 	var temp;
