@@ -312,29 +312,41 @@
 </html>
 <script language="javascript">
 
-    function getGrades(list, tRows) {
+   function getGrades(list, tRows) {
         var grades = [];
         var studentIds = [];
         var out_of;
+        var percents = [];
 
         for (i = 0; i < list.length; i++) {
+            var outOf = false;
             if (list[i].getAttribute("NAME").includes("grade")) {
                 grades.push(list[i].getAttribute("VALUE"));
                 console.log((list[i].getAttribute("VALUE")));
             }
-            else if (list[i].getAttribute("NAME").includes("points")) {
+            else if (list[i].getAttribute("NAME").includes("points") && !outOf) {
                 out_of = list[i].getAttribute("Value");
+                outOf = true;
             }
         }
 
         for (i = 0; i < tRows.length; i++) {
+            console.log(i);
             if (tRows[i].getAttribute("class") === "even" || tRows[i].getAttribute("class") === "odd") {
-                var td = document.getElementsByTagName("td");
-                studentIds.push(td[0].innerHTML);
-                console.log(td[0].innerHTML);
+                var td = tRows[i].getElementsByTagName("td");
+                var num = td[0].innerHTML;
+                num = num.split("(")[1].split(")")[0];
+                studentIds.push(num);
+                console.log(num);
             }
 
         }
+
+        for (i = 0; i < grades.length; i++) {
+            percents.push(grades[i] / out_of * 100);
+        }
+        console.log(percents);
+        console.log(studentIds);
     }
 
 
@@ -342,11 +354,6 @@
         // array of all table data elements
         var list = document.getElementsByTagName("INPUT");
         var rows = document.getElementsByTagName("tr");
-        //print value of each element
-        for (i = 0; i < list.length; i++) {
-            // console.log(list[i].getAttribute("VALUE"));
-        //alert(list[i].VALUE);
-        };
         getGrades(list, rows);
     }
 
