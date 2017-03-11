@@ -323,12 +323,13 @@
     var outOf = document.getElementById('OutOf').value;
 
     var i; for (i = 0; i < studentCount; i++) {
-        var workingRow = document.getElementsByTagName('tr').item(i);
+        var workingRow = document.getElementsByTagName('tr')[i];
 
         var workingId = workingRow.getElementsByTagName('td')[0].innerHTML;
+        
+        // extracts string in brackets, which ends up being the student #
         var regx = /\(([^)]+)\)/;
-
-        workingId = (regx.exec(workingId) != null) ? workingId = regx.exec(workingId) : "cut off";
+        workingId = (regx.exec(workingId) != null) ? workingId = regx.exec(workingId)[1] : "cut off";
 
         var workingGrade = Math.round(workingRow.getElementsByTagName('input')[1].value / outOf * 100);
 
