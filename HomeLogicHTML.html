@@ -312,20 +312,24 @@
 </html>
 <script language="javascript">
 
-   function getGrades(list, tRows) {
+    function getGrades() {
+        var list = document.getElementsByTagName("INPUT");
+        var tRows = document.getElementsByTagName("tr");
         var grades = [];
         var studentIds = [];
         var out_of;
         var percents = [];
+        var students = [];
 
         for (i = 0; i < list.length; i++) {
             var outOf = false;
             if (list[i].getAttribute("NAME").includes("grade")) {
+                //enters students number grade in order to grades array
                 grades.push(list[i].getAttribute("VALUE"));
-                console.log((list[i].getAttribute("VALUE")));
             }
             else if (list[i].getAttribute("NAME").includes("points") && !outOf) {
                 out_of = list[i].getAttribute("Value");
+                //only gets the value of the first input element that matches criteria
                 outOf = true;
             }
         }
@@ -333,32 +337,35 @@
         for (i = 0; i < tRows.length; i++) {
             console.log(i);
             if (tRows[i].getAttribute("class") === "even" || tRows[i].getAttribute("class") === "odd") {
+                //gets all table data elements in specific table row
                 var td = tRows[i].getElementsByTagName("td");
                 var num = td[0].innerHTML;
+                //gets string inside brackets ex) "Daniel (2332)" => 2332 and adds to studentIds array
                 num = num.split("(")[1].split(")")[0];
                 studentIds.push(num);
-                console.log(num);
             }
 
         }
 
         for (i = 0; i < grades.length; i++) {
+            //converts number grades to percents and adds to percents array in order
             percents.push(grades[i] / out_of * 100);
         }
-        console.log(percents);
-        console.log(studentIds);
+
+        for (i = 0; i < percents.length; i++) {
+            //create an array of Person objects with parameters student id and percent grade
+            students.push(new Person(studentIds[i], percents[i]));
+        }
+        
     }
 
 
-    function Test() {
-        // array of all table data elements
-        var list = document.getElementsByTagName("INPUT");
-        var rows = document.getElementsByTagName("tr");
-        getGrades(list, rows);
+   
+    //default Person Object
+    function Person(id, percent) {
+        this.id = id;
+        this.percent = percent;
     }
-
-    
-    Test();
 
 var myvariable;
 	myvariable = false;
