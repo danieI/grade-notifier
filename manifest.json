@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+
+  "name": "Grade Notifier",
+  "description": "This extension will create students array in content.js",
+  "version": "1.0",
+
+  "browser_action": {
+    //need a graphic for Grade Notifier inc.
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    //specify homelogic here also?
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        //specify homelogic?
+        "https://*/*",
+        "https://*/*"
+      ],
+      "js": [ "content.js" ],
+      //this is where we listen for submit button press
+      "run_at":  "document_start"
+    }
+  ]
+
+}
