@@ -5,5 +5,5 @@ Our website is [gradenotifier.com](http://gradenotifier.com). (Currently blank).
 ## Contributers
 - Landen Danyluk
 - Daniel Lysack
-- I can't spell his name. Edit this.
+- Iwan Levin
 
