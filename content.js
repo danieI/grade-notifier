@@ -1,15 +1,13 @@
-// JavaScript source code
+// Runs automagically on button press
 
 function Student(id, grade) {
     this.id = id;
     this.grade = grade;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.getElementById("testButton").addEventListener("click", captureGrades);
 
-    var hello = document.getElementById('AddTaskButton').value;
-    console.log(hello);
-
+function captureGrades() {
     var students = []
     var studentCount = document.getElementById('StudentCount').value;
     var outOf = document.getElementById('OutOf').value;
@@ -20,11 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
         workingId = (regx.exec(workingId) != null) ? workingId = regx.exec(workingId)[1] : "cut off";
         var workingGrade = Math.round(workingRow.getElementsByTagName('input')[1].value / outOf * 100);
         students.push(new Student(workingId, workingGrade));
-    }
+    }  
     console.log(students);
-});
+}
 
 
-
-
-
+    
