@@ -11,7 +11,7 @@
     "author": "Grade Notifier Inc.",
 
     "content_scripts": [{
-        "matches": ["file:///*"],
+        "matches": [""],
         "js":      ["content.js"]
     }],
 
