@@ -2,6 +2,7 @@
 function doStuffWithDom(studentsArray) {
     //this is where we need to convert array to JSON
     //also send it too sinatra
+    alert(studentsArray[2].id);
   }
 
 // // When the browser-action button is clicked...
