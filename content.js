@@ -1,30 +1,46 @@
-// JavaScript source code
+var students = [];
 
 function Student(id, grade) {
     this.id = id;
     this.grade = grade;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    var hello = document.getElementById('AddTaskButton').value;
-    console.log(hello);
-
-    var students = []
+function sendGrades() {
     var studentCount = document.getElementById('StudentCount').value;
     var outOf = document.getElementById('OutOf').value;
+
     var i; for (i = 0; i < studentCount; i++) {
         var workingRow = document.getElementsByTagName('tr').item(i);
+
         var workingId = workingRow.getElementsByTagName('td')[0].innerHTML;
-        var regx = /\(([^)]+)\)/;
-        workingId = (regx.exec(workingId) != null) ? workingId = regx.exec(workingId)[1] : "cut off";
-        var workingGrade = Math.round(workingRow.getElementsByTagName('input')[1].value / outOf * 100);
+        // extract student number contained in brackets from innerHTML ^
+        var matches = /\(([^)]+)\)/.exec(workingId);
+        // matches = null when student number is cut off
+        if (matches != null) { workingId = matches[1]; }
+        else { workingId = "cutt off"; }
+
+        var workingGrade = workingRow.getElementsByTagName('input')[1].value;
+        workingGrade = Math.round(workingGrade / outOf * 100);
+
         students.push(new Student(workingId, workingGrade));
     }
-    console.log(students);
+
+  }
+
+  var button = document.getElementById("Submit1")
+  button..addEventListener("click", function(){
+    chrome.runtime.sendMessage({text: "click"})
 });
 
+// Listen for messages
+chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+    // If the received message has the expected format...
+    if (msg.text === 'report_back') {
 
+        // process DOM data
+        sendGrades();
+        //send students array!
+        sendResponse(students);
 
-
-
+    }
+});
