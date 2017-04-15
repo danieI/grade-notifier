@@ -1,44 +1,23 @@
-// {
-//     "manifest_version": 2,
-//     "name":    "Grade Notifier",
-//     "version": "1.0",
-//     "description": "Chrome extension component for Grade Notifier",
+ {
+     "manifest_version": 2,
+     "name":    "Grade Notifier",
+     "version": "1.0",
+     "description": "Chrome extension component for Grade Notifier",
 
-//     "background": {
-//     "persistent": false,
-//     "scripts": ["background.js"]
-//   },
+     "background": {
+     "persistent": false,
+     "scripts": ["background.js"]
+   },
 
-//     "browser_action": {
-//         "default_title": "Grade Notifier"
-//     },
+     "browser_action": {
+         "default_title": "Grade Notifier"
+     },
 
-//     "author": "Grade Notifier Inc.",
+     "author": "Grade Notifier Inc.",
 
-//     "content_scripts": [{
-//         "matches": ["<all_urls>"],
-//         "js":      ["content.js"]
-//     }],
-
-//     "permissions": ["activeTab"]
-// }
-
-{
-  "manifest_version": 2,
-  "name": "Test Extension",
-  "version": "0.0",
-
-  "background": {
-    "persistent": false,
-    "scripts": ["background.js"]
-  },
-  "content_scripts": [{
-    "matches": ["*://*.stackoverflow.com/*"],
-    "js": ["content.js"]
-  }],
-  "browser_action": {
-    "default_title": "Test Extension"
-  },
-
-  "permissions": ["activeTab"]
-}
+     "content_scripts": [{
+         "matches": ["<all_urls>"],
+         "js":      ["content.js"]
+     }],
+     "permissions": ["activeTab"]
+ }
