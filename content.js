@@ -27,6 +27,7 @@ function sendGrades() {
 
   }
 
+
    var button = document.getElementById("Submit1")
   button.addEventListener("click", function(){
     sendGrades();
